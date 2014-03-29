@@ -1,0 +1,14 @@
+﻿@{
+    ViewBag.Title = "Lista de Mensajes";
+}
+
+<h2>My GuestBook Entries</h2>
+Uso de LocalDb para Almacenamiento de Mensajes
+<p><a href="/GuestBook/Create">Agregar una Entrada</a></p>
+@foreach (var entry in ViewBag.Entries){
+    <section class="contact">
+        <header><h3>@entry.Message</h3></header>
+        <p>Posteado por :  @entry.Name el @entry.DateAdded.ToLongDateString()</p>
+    </section>
+
+}
