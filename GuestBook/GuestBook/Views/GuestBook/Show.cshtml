@@ -1,0 +1,26 @@
+﻿@model GuestBook.Models.GuestBookEntry
+
+@{
+    ViewBag.Title = "Show";
+}
+<!-- Todos los detalle los agregasmo despues-->
+<h2>Datos de la Entrada</h2>
+<dl>
+    <dt>Nombre :</dt>
+    <dt>@Model.Name</dt>
+
+    <dt>Fecha de Publicacion :</dt>
+    <dt>@Model.DateAdded</dt>
+
+    <dt>Mensaje :</dt>
+    <dt>@Model.Message</dt>
+</dl>
+
+<p>
+@if (ViewBag.hasPermissions) 
+{
+    @Html.ActionLink("Editar", "Edit", new { id=Model.Id});
+}
+@Html.ActionLink("Volver a la lista de Entradas","Index");
+</p>
+

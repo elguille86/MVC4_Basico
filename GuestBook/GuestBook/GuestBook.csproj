@@ -176,6 +176,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnotherController.cs" />
     <Compile Include="Controllers\GuestBookController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Filters\InitializeSimpleMembershipAttribute.cs" />
@@ -183,6 +184,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\ComentSumary.cs" />
     <Compile Include="Models\GuestBookContext.cs" />
     <Compile Include="Models\GuestBookEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -247,6 +249,7 @@
     <Content Include="Global.asax" />
     <Content Include="Views\GuestBook\Create.cshtml" />
     <Content Include="Views\GuestBook\index.cshtml" />
+    <Content Include="Views\GuestBook\Show.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
