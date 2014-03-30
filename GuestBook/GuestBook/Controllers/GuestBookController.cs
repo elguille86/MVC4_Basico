@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using GuestBook.Infraestruture;
 using GuestBook.Models;
 
 namespace GuestBook.Controllers
@@ -11,14 +12,29 @@ namespace GuestBook.Controllers
     {
         //
         // GET: /GuestBook/
-        private GuestBookContext ctx = new GuestBookContext();
+        //private GuestBookContext ctx = new GuestBookContext();
+        private IGuestbookRepository _guestbookRepository;
+
+        public GuestBookController(IGuestbookRepository guestbookRepository)
+        {
+            _guestbookRepository = guestbookRepository;
+        }
+
+        public GuestBookController() : this(new EFGuestbookRepository())
+        {
+        }
+
 
         public ActionResult index() {
             //Listando los 20 primeros
             //uso de linQ
-            var entries = (from e in ctx.Entries orderby e.DateAdded descending select e).Take(20); 
-            ViewBag.Entries = entries.ToList();
-            return View();
+            /*
+            var entries = (from e in ctx.Entries 
+                           orderby e.DateAdded descending 
+                           select e).Take(20); 
+            ViewBag.Entries = entries.ToList();*/
+            var entries = _guestbookRepository.GetMostRecentEntries();
+            return View(entries);
         }
 
         public ActionResult Create()
@@ -32,11 +48,7 @@ namespace GuestBook.Controllers
             // Verifica la validacion del GuestbookEntry.cs
             if (ModelState.IsValid)
             {
-                entry.DateAdded = DateTime.Now;
-                ctx.Entries.Add(entry);
-                ctx.SaveChanges();
-                // return Content("La entrada se envio Correctamente");
-                // Se cambia para rediccion a la vista index
+                _guestbookRepository.AddEntry(entry);
                 return RedirectToAction("index");
             }
             else {
@@ -47,7 +59,8 @@ namespace GuestBook.Controllers
         public ActionResult Show(int id) 
         {
             // El metodo find buscara una cantidad [pr su clave  actua;
-            var entry = ctx.Entries.Find(id);
+            //var entry = ctx.Entries.Find(id);
+            var entry = _guestbookRepository.FindById(id);
 
             // el objeto User.Identity nos da acceso al usuario actualmente logueado y que es
             // fijado por el proveedor de Menbership (No tiene que hacer nada al respecto con
@@ -62,15 +75,7 @@ namespace GuestBook.Controllers
 
         public ActionResult CommentSummary() 
         {
-            var entries = from entry in ctx.Entries
-                group entry by entry.Name
-                    into groupbyName
-                    orderby groupbyName.Count()
-                    select new ComentSumary()
-                    {
-                        UserNae = groupbyName.Key,
-                        NumberOfComents = groupbyName.Count()
-                    };
+            var entries = _guestbookRepository.GetCommentSummearies();
             return View(entries);
         }
 

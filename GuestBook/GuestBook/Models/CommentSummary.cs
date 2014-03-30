@@ -5,11 +5,11 @@ using System.Web;
 
 namespace GuestBook.Models
 {
-    public class ComentSumary
+    public class CommentSummary
     {
 
-        public String UserNae { get; set; }
+        public String UserName { get; set; }
 
-        public int NumberOfComents { get; set; }
+        public int NumberOfComments { get; set; }
     }
 }

@@ -183,8 +183,10 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Infraestruture\EFGuestbookRepository.cs" />
+    <Compile Include="Infraestruture\IGuestbookRepository.cs" />
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\ComentSumary.cs" />
+    <Compile Include="Models\CommentSummary.cs" />
     <Compile Include="Models\GuestBookContext.cs" />
     <Compile Include="Models\GuestBookEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

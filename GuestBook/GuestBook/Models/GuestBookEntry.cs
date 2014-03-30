@@ -9,8 +9,10 @@ namespace GuestBook.Models
     public class GuestBookEntry
     {
         public int Id { get; set; }
-        [Required]
+        
+        [Required(ErrorMessage="Debe Ingresar un nombre .")]
         public string Name { get; set; }
+
         [Required]
         public string Message { get; set; }
 
